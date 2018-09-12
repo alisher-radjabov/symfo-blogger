@@ -10,10 +10,18 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/", name="blog_user_index")
      */
     public function indexAction(Request $request)
     {
         return new Response('User controller');
+    }
+
+    /**
+     * @Route("/list" name="blog_user_list")
+     */
+    public function listAction()
+    {
+
     }
 }
