@@ -1,0 +1,9 @@
+{% extends 'BlogBundle::base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@BlogBundle/Resources/public/js/admin.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

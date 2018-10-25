@@ -1,0 +1,14 @@
+{% extends 'BlogBundle::admin.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Create new post' | trans }}</h1>
+
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">{{ flashMessage | trans }}</div>
+    {% endfor %}
+
+    {% include 'BlogBundle:Admin/Post:_form.html.twig' %}
+
+    <br/>
+{% endblock %}

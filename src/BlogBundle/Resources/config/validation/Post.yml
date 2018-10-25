@@ -1,0 +1,12 @@
+BlogBundle\Entity\Post:
+    properties:
+        title:
+            - NotBlank:
+            - Length:
+                max: 255
+        description:
+            - NotBlank:
+            - Length:
+                max: 1024
+        text:
+             - NotBlank:

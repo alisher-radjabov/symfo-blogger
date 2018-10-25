@@ -1,0 +1,62 @@
+{% extends 'BlogBundle::admin.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ 'Posts Admin' | trans }}</h1>
+
+    <br/>
+
+    <form class="search-form form-inline float-left" method="get" action="{{ path('admin_index') }}">
+        <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search by title' | trans }}" name="s"
+               value="{{ app.request.get('s') }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'Search' | trans }}</button>
+    </form>
+    <a href="{{ path('admin_add_post') }}" class="btn btn-outline-primary float-right">{{ 'Add new post' | trans }}</a>
+
+    <div class="clearfix"></div>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-success">{{ flashMessage | trans }}</div>
+    {% endfor %}
+
+    {% if posts | length > 0 %}
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">{{ 'Title' | trans }}</th>
+                <th scope="col">{{ 'Date' | trans }}</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <th scope="row">{{ post.id }}</th>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.createdAt.format('Y.m.d H:i:s') }}</td>
+                    <td>
+                        <a href="{{ path('admin_update_post', { id: post.id }) }}"
+                           class="btn btn-primary">{{ 'Edit' | trans }}</a>
+                        <a href="{{ path('admin_delete_post', { id: post.id }) }}"
+                           class="btn btn-danger admin-delete-post-btn">{{ 'Delete' | trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% if posts.haveToPaginate %}
+            <div class="navigation">
+                {{ pagerfanta(posts, 'app_pagerfanta_template_default', {routeName: 'admin_index', 'routeParams': { s: app.request.get('s') }} ) }}
+            </div>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-info">
+            {{ 'Posts not found' | trans }}
+        </div>
+    {% endif %}
+
+{% endblock %}

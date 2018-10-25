@@ -1,0 +1,30 @@
+{{ form_start(form, {attr: { class: 'post_form' }}) }}
+
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, { attr: { class: 'form-control' }, required: false }) }}
+    {% for error in form.title.vars.errors %}
+        <span class="text-danger">{{ error.message }}</span><br/>
+    {% endfor %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, { attr: { class: 'form-control'}, required: false  }) }}
+    {% for error in form.description.vars.errors %}
+        <span class="text-danger">{{ error.message }}</span><br/>
+    {% endfor %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.text) }}
+    {{ form_widget(form.text, { attr: { class: 'form-control'}, required: false  }) }}
+    {% for error in form.text.vars.errors %}
+        <span class="text-danger">{{ error.message }}</span><br/>
+    {% endfor %}
+</div>
+
+<button type="submit"
+        class="btn btn-primary">{% if form.vars.value.id %}{{ 'Update post' | trans }}{% else %}{{ 'Add new post' | trans }}{% endif %}</button>
+
+{{ form_end(form) }}

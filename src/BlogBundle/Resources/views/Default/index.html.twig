@@ -1,0 +1,44 @@
+{% extends 'BlogBundle::base.html.twig' %}
+
+{% block body %}
+
+    <form class="search-form form-inline pull-right" method="get" action="{{ path('homepage') }}">
+        <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search by title' | trans }}" name="s"
+               value="{{ app.request.get('s') }}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{ 'Search' | trans }}</button>
+    </form>
+
+    <div class="posts">
+        {% if posts | length > 0 %}
+            {% for post in posts %}
+                <div class="pos">
+                    <h2>{{ post.title }}</h2>
+                    <span class="badge badge-default">{{ post.createdAt.format('Y.m.d H:i:s') }}</span>
+                    <p>{{ post.description }}</p>
+                    <p><a class="btn btn-primary" href="{{ path('view_post', { id: post.id }) }}" role="button">View
+                            details »</a></p>
+                </div>
+            {% endfor %}
+
+            {% if posts.haveToPaginate %}
+                <div class="navigation">
+                    {{ pagerfanta(posts, 'app_pagerfanta_template_default', {routeName: 'homepage', 'routeParams': { s: app.request.get('s') }} ) }}
+                </div>
+            {% endif %}
+
+        {% else %}
+            <div class="alert alert-info">
+                {{ 'Posts not found' | trans }}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@BlogBundle/Resources/public/js/posts.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

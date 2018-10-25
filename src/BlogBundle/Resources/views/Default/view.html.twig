@@ -1,0 +1,12 @@
+{% extends 'BlogBundle::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ post.title }}</h1>
+    <span class="badge badge-default">{{ post.createdAt.format('Y.m.d H:i:s') }}</span>
+    <div>
+        {{ post.text }}
+    </div>
+    <br/>
+    <a href="{{ path('homepage') }}" class="btn btn-primary">{{ 'Return to homepage' | trans }}</a>
+
+{% endblock %}

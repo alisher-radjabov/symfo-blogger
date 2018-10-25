@@ -1,0 +1,33 @@
+BlogBundle\Entity\Post:
+    type: entity
+    table: null
+    repositoryClass: BlogBundle\Repository\PostRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    indexes:
+        title:
+            columns: [ title ]
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: string
+            length: 1024
+        text:
+            type: text
+        createdAt:
+            type: datetime
+            column: created_at
+            nullable: false
+        updatedAt:
+            type: datetime
+            column: updated_at
+            nullable: true
+    lifecycleCallbacks:
+        preUpdate: [ 'updateTimestamps' ]
+        prePersist: [ 'updateTimestamps' ]

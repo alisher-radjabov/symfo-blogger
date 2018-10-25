@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome to Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite'
+            '@bootstrap_css'
+            '@BlogBundle/Resources/public/css/app.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-faded navbar-toggleable-md">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{{ path('homepage') }}">{{ 'Example blog' | trans }}</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('homepage') }}">{{ 'Home' | trans }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin_index') }}">{{ 'Admin' | trans }}</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav float-right">
+            <li class="nav-item">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <a class="nav-link" href="{{ path('logout') }}">{{ app.user.username }} - {{ 'Logout' | trans }}</a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('login') }}">{{ 'Login' | trans }}</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container page">
+    {% block body %}{% endblock %}
+</div>
+
+<footer>
+    <div class="container text-center">
+        <hr/>
+        <span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}
+    </div>
+</footer>
+
+
+{% block javascripts %}
+    {% javascripts
+        '@jquery_js'
+        '@bootstrap_js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+</body>
+</html>
+
+
+
+
+
+
