@@ -1,0 +1,39 @@
+{
+  "name": "blogger",
+  "version": "1.0.0",
+  "description": "Building a basic blog web app using Symfony 3 and VueJS",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alisherradjabov/symfo-blogger.git"
+  },
+  "keywords": [
+    "blog",
+    "vue.js",
+    "symfony"
+  ],
+  "author": "Alisher Radjabov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alisherradjabov/symfo-blogger/issues"
+  },
+  "homepage": "https://github.com/alisherradjabov/symfo-blogger#readme",
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
